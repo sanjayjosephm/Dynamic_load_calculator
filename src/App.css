@@ -1,38 +1,58 @@
+body{
+  padding: 3rem;
+}
+
 .App {
   text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  flex-wrap: wrap;
+}
+input{
+  border: 1px solid grey;
+  width: 6.5rem;
+  height: 1.5rem;
+  transition: .2 ease-in;
+  margin-left: 4px;
+}
+input:hover{
+  border: 2px solid rgb(16, 16, 232);
+}
+button{
+  width: fit-content;
+  height: 1.7rem;
+  /* margin-top: 30px; */
+  cursor: pointer;
+  border-radius: 2px;
 }
 
-.App-link {
-  color: #61dafb;
+#remove{
+  margin-left: 4px;
+  margin-top: 20px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.button-section{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  padding: 2rem;
+}
+
+.input-section{
+  display: flex;
+  flex-direction: column;
+}
+.form-section{
+  display: flex;
+
+}
+.text-color{
+  color: rgb(17, 118, 219);
+}
+.Logic div{
+  font-size: larger;
+  font-weight: 500;
 }
