@@ -22,7 +22,7 @@ function App() {
     height: 269,
     max_cbm: 68,
   };  
-  
+
   const [inputFields, setInputFields] = useState([
     { name: "", length: "", width: "", height: "", quantity: "", weight: "" },
   ]);
@@ -84,10 +84,18 @@ function App() {
         calculateContainers(temp2);
         resultString += `| 40hq container : ${temp1} | `
       }
+      if(temp2===0){
+        resultString += `| 40hq container : ${temp1} | `
+      }
+      else{
+        calculateContainers(temp2);
+        resultString += `| 40hq container : ${temp1} | `
+      }
       // calculateContainers(temp1);
+      calculateContainers(temp2);
       console.log(temp1)
       console.log(temp2)
-      
+      resultString += `| 40hq container : ${temp1} | `
 
     } else {
       console.log("error side")
