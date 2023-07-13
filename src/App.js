@@ -22,7 +22,7 @@ function App() {
     height: 269,
     max_cbm: 68,
   };  
-
+  
   const [inputFields, setInputFields] = useState([
     { name: "", length: "", width: "", height: "", quantity: "", weight: "" },
   ]);
@@ -77,11 +77,17 @@ function App() {
     else if (totCBM > highcube_40.max_cbm) {
       let temp1 = Math.floor((totCBM / highcube_40.max_cbm).toFixed(2));
       let temp2 = totCBM%highcube_40.max_cbm
+      if(temp2===0){
+        resultString += `| 40hq container : ${temp1} | `
+      }
+      else{
+        calculateContainers(temp2);
+        resultString += `| 40hq container : ${temp1} | `
+      }
       // calculateContainers(temp1);
-      calculateContainers(temp2);
       console.log(temp1)
       console.log(temp2)
-      resultString += `| 40hq container : ${temp1} | `
+      
 
     } else {
       console.log("error side")
@@ -143,7 +149,7 @@ function App() {
                 <label>Name</label>
                 <input
                   name="name"
-                  placeholder="Name"
+                  placeholder="cargo"
                   value={input.name}
                   onChange={(event) => handleFormChange(index, event)}
                 />
