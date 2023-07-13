@@ -208,7 +208,7 @@ function App() {
         {showResult && (
           <div>
             <span className="text-color"> Total CBM:{calculateTotalCBM()}</span><br></br>
-            {calculateContainers(parseFloat(calculateTotalCBM()))} 
+            <h3>{calculateContainers(parseFloat(calculateTotalCBM()))} </h3>
           </div>
         )}
       </div>

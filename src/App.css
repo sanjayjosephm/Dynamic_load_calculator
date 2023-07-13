@@ -53,6 +53,10 @@ button{
   color: rgb(17, 118, 219);
 }
 .Logic div{
-  font-size: larger;
+  font-size: x-large;
   font-weight: 500;
+}
+
+.Logic div h3{
+  
 }
