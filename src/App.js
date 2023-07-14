@@ -51,57 +51,60 @@ function App() {
   let feet40Sum = 0
   let hq40Sum = 0
   let resultString = ``
-
+  let count = 0
   const calculateContainers = (totCBM) => {
-
+    let sample = 0
     if (totCBM <= feet_20.max_cbm) {
       feet20Sum += 1;
       console.log(feet20Sum)
-      resultString += `| 20ft container : ${feet20Sum} | `
+      resultString += `20ft container : ${feet20Sum}<br>`
 
     }
     else if (feet_20.max_cbm < totCBM && totCBM <= feet_40.max_cbm) {
       feet40Sum += 1;
       console.log(feet40Sum)
-      resultString += `| 40ft container : ${feet40Sum} | `
+      resultString += `40ft container : ${feet40Sum}<br>`
 
 
     } 
     else if (feet_40.max_cbm < totCBM && totCBM <= highcube_40.max_cbm) {
+      count += 1
       hq40Sum += 1;
-      console.log(hq40Sum)
-      resultString += `| 40hq container : ${hq40Sum} | `
+      if(count>1){
+        resultString = `40hq container : ${hq40Sum}<br>`
+        console.log("worked 1")
+      }
+      else{
+        resultString += `40hq container : ${hq40Sum}<br>`
+      }
+    }
 
-
-    } 
     else if (totCBM > highcube_40.max_cbm) {
+      count += 1
       let temp1 = Math.floor((totCBM / highcube_40.max_cbm).toFixed(2));
       let temp2 = totCBM%highcube_40.max_cbm
+      hq40Sum = temp1
+      console.log(hq40Sum)
       if(temp2===0){
-        resultString += `| 40hq container : ${temp1} | `
+        resultString += `40hq container : ${temp1}<br>`
+      }
+      else if(feet_40.max_cbm < temp2 && temp2 <= highcube_40.max_cbm){
+        calculateContainers(temp2);
+        console.log("worked 3")
       }
       else{
         calculateContainers(temp2);
-        resultString += `| 40hq container : ${temp1} | `
+        resultString += `40hq container : ${temp1}<br>`
+        console.log("worked 2")
       }
-      if(temp2===0){
-        resultString += `| 40hq container : ${temp1} | `
-      }
-      else{
-        calculateContainers(temp2);
-        resultString += `| 40hq container : ${temp1} | `
-      }
-      // calculateContainers(temp1);
-      calculateContainers(temp2);
-      console.log(temp1)
-      console.log(temp2)
-      resultString += `| 40hq container : ${temp1} | `
-
-    } else {
+      // console.log("Temp 1 : "+temp1)
+      // console.log("Count : "+ count)
+    } 
+    else {
       console.log("error side")
-      return <h1>The given cbm is invalid</h1>;
+      resultString = `The given cbm is invalid`
     }
-    return resultString
+    return <div dangerouslySetInnerHTML={{ __html: resultString }} />;
   };
 
   const addFields = () => {
@@ -213,16 +216,15 @@ function App() {
         })}
       </form>
       <div className="button-section">
-        <button onClick={addFields}>Add More..</button>
+        <button onClick={addFields}>Add Cargo</button>
         <button onClick={submit}>Submit</button>
         <button onClick={resetForm}>Reset</button>
       </div>
-
       <div className="Logic">
         {showResult && (
           <div>
-            <span className="text-color"> Total CBM:{calculateTotalCBM()}</span><br></br>
-            <h3>{calculateContainers(parseFloat(calculateTotalCBM()))} </h3>
+            <span className="text-color"> Total CBM : {calculateTotalCBM()}</span><br></br>
+            <h3>{calculateContainers(parseFloat(calculateTotalCBM()))}</h3>
           </div>
         )}
       </div>
